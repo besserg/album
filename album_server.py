@@ -1,5 +1,3 @@
-import os
-import json
 import album
 from bottle import route
 from bottle import run

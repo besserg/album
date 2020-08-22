@@ -36,26 +36,26 @@ def validate(data):
     return result
 
 
-def save_user(user_data):
-    album.savetodb(user_data)
+def save_album(new_data):
+    album.savetodb(new_data)
 
 
-@route("/user", method="POST")
-def user():
-    user_data = {
+@route("/new_album", method="POST")
+def new_album():
+    album_data = {
         "artist": request.forms.get("artist"),
         "year": request.forms.get("year"),
         "genre": request.forms.get("genre"),
         "album": request.forms.get("album")
     }
-    if validate(user_data):
+    if validate(album_data):
         # Поиск по паре Артист+Альбом
-        albums_list = album.find(user_data["artist"], user_data["album"])
+        albums_list = album.find(album_data["artist"], album_data["album"])
         # Проверяем длину списка
         p = len(albums_list)
         # Если длина списка = 0, то записываем в БД
         if p == 0:
-            save_user(user_data)
+            save_album(album_data)
             print("User saved to DB")
             return "Данные успешно сохранены"
         else:

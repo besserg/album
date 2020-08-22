@@ -31,6 +31,8 @@ def validate(data):
             raise InvalidDataValue("Длина парметра {} равна нулю!".format(p))
         elif p == "year" and (len(data[p]) != 4 or not data[p].isdigit()):
             raise InvalidDataValue("Некорректное значение параметра {}".format(p))
+        elif p != "year" and not (data[p] is str):
+            raise InvalidDataValue("Некорректный формат параметра {}! Должна быть строка!".format(p))
     return result
 
 
